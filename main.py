@@ -35,6 +35,7 @@ def fetchWeather(location):
     return f"Weather: {weather}\nTemperature: {str(temp)}°C\nHumidity {str(humidity)}%"
 
 
+
 def WhatTimeIsItMrWolf():
     return time.time()
 
