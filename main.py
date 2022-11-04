@@ -19,7 +19,7 @@ logging.basicConfig(level=logging.INFO)
 logging.info('Discord Bot activated!')
 
 
-def awaitLog(message):
+def awaitLog(message): # doesn't work - idk how await works
     logging.info(message)
     return True
 
@@ -32,7 +32,7 @@ def fetchWeather(location):
     weather = json_weather['current']['condition']['text']
     temp = json_weather['current']['temp_c']
     humidity = json_weather['current']['humidity']
-    return f"Weather: {weather}\nTemperature: {str(temp)}°C\nHumidity {str(humidity)}%"
+    return f"Location: {location}\nWeather: {weather}\nTemperature: {str(temp)}°C\nHumidity {str(humidity)}%"
 
 
 
@@ -74,8 +74,8 @@ class HyBridCommands:
         self.desc = description
         self.id = server_id
         self.command = command
-        self.arguments = arguments
-        if arguments == True:
+        self.arguments = arguments # goes for one with args if True, else no arg.
+        if arguments:
             self.Main()
         else:
             self.NoArgsMain()
@@ -84,9 +84,9 @@ class HyBridCommands:
         @bot.hybrid_command(name=self.name, with_app_command=self.app_command, description=self.desc)
         @app_commands.guilds(self.id)
         @commands.has_permissions(administrator=True)
-        async def main(ctx: commands.Context, arguments):
+        async def main(ctx: commands.Context, args):
             await ctx.defer(ephemeral=True)
-            await ctx.reply(self.command(self.arguments))
+            await ctx.reply(self.command(args))
             # await logging.info(f'{commands.context}')
 
     def NoArgsMain(self):
