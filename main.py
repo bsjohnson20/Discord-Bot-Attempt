@@ -1,5 +1,7 @@
 import json
 import logging
+import random
+
 from discord import app_commands
 from discord.ext import commands
 import discord
@@ -140,6 +142,10 @@ pony = HyBridCommands(name='4',
                       app=True,
                       description='pong',
                       command=lambda: '4')
+pony = HyBridCommands(name='true-or-false',
+                      app=True,
+                      description='hehe',
+                      command=lambda: 1 == random.randint(0,1))
 bot.run(TOKEN)
 
 # Weather = HyBridCommands(name='weather', app=True, description='Returns the weather of location', command=fetchWeather)
